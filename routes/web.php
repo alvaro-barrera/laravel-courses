@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +25,8 @@ use Inertia\Inertia;
 //    ]);
 //});
 
-Route::view('/','index')->name('home');
+Route::get('/',[PageController::class, 'home'])->name('home');
+Route::get('course/{course:slug}', [PageController::class, 'course'])->name('course');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
